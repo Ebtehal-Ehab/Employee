@@ -1,57 +1,40 @@
 #include<iostream>
 #include<string>
 using namespace std;
-class Employee {
+class BankAccount {
 private:
-	string name = "Unknown";
-	int age = 18;
-	double salary = 0;
+	int  account_number;
+	double balance;
+	string account_holder_name;
 public:
-	void setName(string n) {
-		if (!n.empty()&&n!=" ") name = n;
+	BankAccount(int num ,double bal,string name) {
+		 account_number= num;
+		 balance =bal;
+		 account_holder_name = name;
 	}
-	string getName() {
-		return name;
+	void Deposit(double deposit_amount){
+		balance += deposit_amount;
 	}
-	void setAge(int a) {
-		if (a >= 18 && a <= 60) age = a;
+	void Withdraw(double withdrawal_amount){
+		if (withdrawal_amount <= balance) {
+			balance -= withdrawal_amount;
+		}
+		else {
+			cout << "You don’t have enough money";
+		}
 	}
-	int getAge() {
-		return age;
-	}
-	void setSalary(double s) {
-		if (s > 0) salary = s;
-	}
-	double getSalary() {
-		return salary;
-	}
-	Employee() {
-		name = "Unknown";
-		age = 18;
-		salary = 0;
-	}
-	Employee(string n, int a, double s) {
-		setName(n);
-		setAge(a);
-		setSalary(s);
-	}
-	void DisplayInfo() {
-		cout << "Name of Employee : " << getName()<< "\n";
-		cout << "Age to Employee : " << getAge() << "\n";
-		cout << "Salary of Employee : " << (double)getSalary() << "\n";
-	}
-	void GiveRaise(double amount) {
-		cout << "Salary before : " << salary << "\n";
-		if (amount > 0) salary = salary + amount;
-		cout << "Salary after : " << salary << "\n";
+	void print() {
+		cout << " Account number : "<< account_number <<"\n";
+		cout << " Balance : "<< balance <<"\n";
+		cout << " Account holder name : "<<account_holder_name<<"\n";
 	}
 };
 int main() {
-	Employee ob1;
-	ob1.DisplayInfo();
-	Employee ob2("Ebtehal", 18, 5000);
-	ob2.DisplayInfo();
-	Employee ob3(" ", 15, -1000);
-	ob3.DisplayInfo();
-	ob2.GiveRaise(3000);
+	BankAccount ob1(8672871, 15200.67389,"tota");
+	ob1.Deposit(2000.789);
+	cout << "------------Deposit----------"<<"\n";
+	ob1.print();
+	ob1.Withdraw(8000);
+	cout << "----------Withdraw------------"<<"\n";
+	ob1.print();
 }
